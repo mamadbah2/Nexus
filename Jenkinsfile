@@ -17,6 +17,7 @@ pipeline {
 
     environment {
         DOCKER_HUB_USER = 'mamadbah2'
+        NEXUS_REGISTRY = 'nexusbuy02.duckdns.org'
         IMAGE_VERSION = "${env.BUILD_NUMBER}"
         GITHUB_TOKEN = credentials('GITHUB_TOKEN_TEXT')
 
@@ -160,29 +161,50 @@ pipeline {
            }
        }
 
-
-
-        stage('Build Docker Images') {
+        stage('Publish Artifacts to Nexus') {
             steps {
-                echo '🐳 Construction des images Docker en parallèle...'
+                // Envoie les JARs vers maven-releases/snapshots
+                // On utilise le settings.xml configuré sur le serveur Jenkins
+                sh 'mvn deploy -DskipTests'
+            }
+        }
+
+        stage('Build & Push Docker Images to Nexus') {
+            steps {
+                echo '🐳 Construction et Push vers Nexus...'
                 script {
+                    // Login Nexus
+                    withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
+                         sh 'echo $NEXUS_PASS | docker login $NEXUS_REGISTRY -u $NEXUS_USER --password-stdin'
+                    }
+
                     def services = ['eureka-server', 'config-service', 'api-gateway', 'product-service', 'user-service', 'media-service', 'order-service', 'frontend']
                     def parallelBuilds = [:]
 
                     services.each { service ->
                         parallelBuilds[service] = {
                             def serviceDir = service == 'frontend' ? 'buy-01-frontend' : service.replace('eureka-server', 'discovery-service')
+                            def localTag = "my_buy01_pipeline2-${service}:latest"
+                            def nexusTagVersion = "${NEXUS_REGISTRY}/buy02-${service}:${IMAGE_VERSION}"
+                            def nexusTagLatest = "${NEXUS_REGISTRY}/buy02-${service}:latest"
+
                             echo "🔨 Construction de ${service}..."
+                            // Build with both local tag (for subsequent stages) and Nexus tags
                             sh """
-                                docker build -t my_buy01_pipeline2-${service}:latest \
+                                docker build \
+                                    -t ${localTag} \
+                                    -t ${nexusTagVersion} \
+                                    -t ${nexusTagLatest} \
                                     --build-arg MAVEN_OPTS="-Dmaven.test.skip=true" \
                                     --cache-from ${DOCKER_HUB_USER}/${PROJECT_NAME}-${service}:latest \
                                     -f ${serviceDir}/Dockerfile \
                                     ${serviceDir}
                             """
+                            echo "📤 Push vers Nexus ${service}..."
+                            sh "docker push ${nexusTagVersion}"
+                            sh "docker push ${nexusTagLatest}"
                         }
                     }
-
                     parallel parallelBuilds
                 }
             }
