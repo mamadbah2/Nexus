@@ -66,17 +66,9 @@ pipeline {
                 stage('Backend Services') {
                     steps {
                         echo '🚀 Build et Tests des Services Backend...'
-                        script {
-                            def services = ['discovery-service', 'config-service', 'api-gateway', 'product-service', 'user-service', 'media-service', 'order-service']
-                            services.each { svc ->
-                                echo "🔨 Build et test de ${svc}..."
-                                sh """
-                                    mvn -f ${svc}/pom.xml clean verify \
-                                        --batch-mode \
-                                        -Dmaven.test.failure.ignore=false
-                                """
-                            }
-                        }
+                        // Construction globale depuis le parent POM
+                        // Cela permet de résoudre correctement le parent et les dépendances entre modules
+                        sh "mvn clean verify --batch-mode -Dmaven.test.failure.ignore=false"
                     }
                 }
             }
