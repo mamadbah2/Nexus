@@ -1,0 +1,17 @@
+# DEMARRER SONARQUBE AVEC VOL
+docker run -d --name sonarqube \
+  -p 9000:9000 \
+  -v sonarqube_data:/opt/sonarqube/data \
+  -v sonarqube_extensions:/opt/sonarqube/extensions \
+  -v sonarqube_logs:/opt/sonarqube/logs \
+  sonarqube:latest
+
+
+Temporary Sonarqube token : squ_a9f2fa8976962a63ad8de76cd3dc33bf4471b7b6
+mvn clean package -DskipTests=false sonar:sonar                                  -Dsonar.projectKey=media-service                                  -Dsonar.host.url=http://localhost:9000                                  -Dsonar.token=squ_a9f2fa8976962a63ad8de76cd3dc33bf4471b7b6
+
+Suppr tous les containers sauf celui de sonarqube
+docker ps -aq | grep -v "$(docker ps -aq --filter ancestor=sonarqube)" | xargs docker rm -f
+
+Sauf Sonarqube et PostgreSQL
+docker ps -q | grep -v -e 087456d7d4e1 -e e0a1d54e6cf4 | xargs docker stop

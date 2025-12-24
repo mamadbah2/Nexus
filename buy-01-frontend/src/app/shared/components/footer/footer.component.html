@@ -1,0 +1,33 @@
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-content">
+      <!-- Brand Section -->
+      <div class="footer-brand">
+        <div class="brand-logo">
+          <lucide-icon [img]="ShoppingCart" class="brand-icon"></lucide-icon>
+          <span class="brand-text">Buy-01</span>
+        </div>
+        <p class="brand-description">
+          Your trusted marketplace for quality orders.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-links">
+        <a routerLink="/orders" class="footer-link">Products</a>
+        <a routerLink="/about" class="footer-link">About</a>
+        <a routerLink="/contact" class="footer-link">Contact</a>
+        <a routerLink="/help" class="footer-link">Help</a>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <p class="footer-copyright">&copy; {{ currentYear }} Buy-01. All rights reserved.</p>
+      <div class="footer-legal">
+        <a routerLink="/privacy" class="footer-legal-link">Privacy</a>
+        <a routerLink="/terms" class="footer-legal-link">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>

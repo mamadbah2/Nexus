@@ -1,0 +1,153 @@
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m----------------------< [0;36msn.dev:discovery-service[0;1m >----------------------[m
+[[1;34mINFO[m] [1mBuilding discovery-service 0.0.1-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m>>> [0;32mspring-boot-maven-plugin:3.5.4:run[m [1m(default-cli)[0;1m > [0;1mtest-compile[m @ [36mdiscovery-service[0;1m >>>[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:resources[m [1m(default-resources)[m @ [36mdiscovery-service[0;1m ---[m
+[[1;34mINFO[m] Copying 1 resource from src/main/resources to target/classes
+[[1;34mINFO[m] Copying 0 resource from src/main/resources to target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.0:compile[m [1m(default-compile)[m @ [36mdiscovery-service[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:testResources[m [1m(default-testResources)[m @ [36mdiscovery-service[0;1m ---[m
+[[1;34mINFO[m] skip non existing resourceDirectory /home/mamadbah/Java/mr-jenk/discovery-service/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.14.0:testCompile[m [1m(default-testCompile)[m @ [36mdiscovery-service[0;1m ---[m
+[[1;34mINFO[m] Nothing to compile - all classes are up to date.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m<<< [0;32mspring-boot-maven-plugin:3.5.4:run[m [1m(default-cli)[0;1m < [0;1mtest-compile[m @ [36mdiscovery-service[0;1m <<<[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mspring-boot-maven-plugin:3.5.4:run[m [1m(default-cli)[m @ [36mdiscovery-service[0;1m ---[m
+[[1;34mINFO[m] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.4)
+
+2025-08-18T14:59:01.321Z  INFO 124044 --- [discovery-service] [           main] s.d.d.DiscoveryServiceApplication        : Starting DiscoveryServiceApplication using Java 21.0.8 with PID 124044 (/home/mamadbah/Java/mr-jenk/discovery-service/target/classes started by mamadbah in /home/mamadbah/Java/mr-jenk/discovery-service)
+2025-08-18T14:59:01.322Z  INFO 124044 --- [discovery-service] [           main] s.d.d.DiscoveryServiceApplication        : No active profile set, falling back to 1 default profile: "default"
+2025-08-18T14:59:01.820Z  INFO 124044 --- [discovery-service] [           main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=82d6fda2-b94f-3253-940b-de69712efcae
+2025-08-18T14:59:01.963Z  INFO 124044 --- [discovery-service] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8761 (http)
+2025-08-18T14:59:01.970Z  INFO 124044 --- [discovery-service] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-18T14:59:01.970Z  INFO 124044 --- [discovery-service] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-08-18T14:59:01.999Z  INFO 124044 --- [discovery-service] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-18T14:59:01.999Z  INFO 124044 --- [discovery-service] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 654 ms
+2025-08-18T14:59:02.452Z  INFO 124044 --- [discovery-service] [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2025-08-18T14:59:02.454Z  INFO 124044 --- [discovery-service] [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2025-08-18T14:59:02.540Z  INFO 124044 --- [discovery-service] [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2025-08-18T14:59:02.540Z  INFO 124044 --- [discovery-service] [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2025-08-18T14:59:02.623Z  INFO 124044 --- [discovery-service] [           main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2025-08-18T14:59:02.930Z  WARN 124044 --- [discovery-service] [           main] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2025-08-18T14:59:02.946Z  INFO 124044 --- [discovery-service] [           main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2025-08-18T14:59:02.957Z  INFO 124044 --- [discovery-service] [           main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2025-08-18T14:59:02.957Z  INFO 124044 --- [discovery-service] [           main] com.netflix.discovery.DiscoveryClient    : Client configured to neither register nor query for data.
+2025-08-18T14:59:02.958Z  INFO 124044 --- [discovery-service] [           main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1755529142958 with initial instances count: 0
+2025-08-18T14:59:02.978Z  INFO 124044 --- [discovery-service] [           main] c.n.eureka.DefaultEurekaServerContext    : Initializing ...
+2025-08-18T14:59:02.979Z  INFO 124044 --- [discovery-service] [           main] c.n.eureka.cluster.PeerEurekaNodes       : Adding new peer nodes [http://localhost:8761/eureka/]
+2025-08-18T14:59:03.027Z  INFO 124044 --- [discovery-service] [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2025-08-18T14:59:03.027Z  INFO 124044 --- [discovery-service] [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2025-08-18T14:59:03.027Z  INFO 124044 --- [discovery-service] [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2025-08-18T14:59:03.027Z  INFO 124044 --- [discovery-service] [           main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2025-08-18T14:59:03.043Z  INFO 124044 --- [discovery-service] [           main] c.n.eureka.cluster.PeerEurekaNodes       : Replica node URL:  http://localhost:8761/eureka/
+2025-08-18T14:59:03.047Z  INFO 124044 --- [discovery-service] [           main] c.n.e.registry.AbstractInstanceRegistry  : Finished initializing remote region registries. All known remote regions: []
+2025-08-18T14:59:03.047Z  INFO 124044 --- [discovery-service] [           main] c.n.eureka.DefaultEurekaServerContext    : Initialized
+2025-08-18T14:59:03.052Z  INFO 124044 --- [discovery-service] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+2025-08-18T14:59:03.074Z  INFO 124044 --- [discovery-service] [           main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application DISCOVERY-SERVICE with eureka with status UP
+2025-08-18T14:59:03.080Z  INFO 124044 --- [discovery-service] [       Thread-9] o.s.c.n.e.server.EurekaServerBootstrap   : isAws returned false
+2025-08-18T14:59:03.081Z  INFO 124044 --- [discovery-service] [       Thread-9] o.s.c.n.e.server.EurekaServerBootstrap   : Initialized server context
+2025-08-18T14:59:03.081Z  INFO 124044 --- [discovery-service] [       Thread-9] c.n.e.r.PeerAwareInstanceRegistryImpl    : Got 1 instances from neighboring DS node
+2025-08-18T14:59:03.081Z  INFO 124044 --- [discovery-service] [       Thread-9] c.n.e.r.PeerAwareInstanceRegistryImpl    : Renew threshold is: 1
+2025-08-18T14:59:03.081Z  INFO 124044 --- [discovery-service] [       Thread-9] c.n.e.r.PeerAwareInstanceRegistryImpl    : Changing status to UP
+2025-08-18T14:59:03.082Z  INFO 124044 --- [discovery-service] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8761 (http) with context path '/'
+2025-08-18T14:59:03.083Z  INFO 124044 --- [discovery-service] [           main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8761
+2025-08-18T14:59:03.083Z  INFO 124044 --- [discovery-service] [       Thread-9] e.s.EurekaServerInitializerConfiguration : Started Eureka Server
+2025-08-18T14:59:03.108Z  INFO 124044 --- [discovery-service] [           main] s.d.d.DiscoveryServiceApplication        : Started DiscoveryServiceApplication in 2.028 seconds (process running for 2.29)
+2025-08-18T15:00:03.082Z  INFO 124044 --- [discovery-service] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2025-08-18T15:00:14.665Z  INFO 124044 --- [discovery-service] [nio-8761-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-18T15:00:14.665Z  INFO 124044 --- [discovery-service] [nio-8761-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-18T15:00:14.666Z  INFO 124044 --- [discovery-service] [nio-8761-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-08-18T15:00:14.863Z  INFO 124044 --- [discovery-service] [nio-8761-exec-2] c.n.e.registry.AbstractInstanceRegistry  : Registered instance PRODUCT-SERVICE/11.11.90.153:order-service:8082 with status UP (replication=false)
+2025-08-18T15:00:15.111Z  INFO 124044 --- [discovery-service] [nio-8761-exec-3] c.n.e.registry.AbstractInstanceRegistry  : Registered instance PRODUCT-SERVICE/11.11.90.153:order-service:8082 with status DOWN (replication=false)
+2025-08-18T15:00:15.692Z  INFO 124044 --- [discovery-service] [nio-8761-exec-4] c.n.e.registry.AbstractInstanceRegistry  : Registered instance PRODUCT-SERVICE/11.11.90.153:order-service:8082 with status DOWN (replication=true)
+2025-08-18T15:00:18.128Z  INFO 124044 --- [discovery-service] [nio-8761-exec-5] c.n.e.registry.AbstractInstanceRegistry  : Cancelled instance PRODUCT-SERVICE/11.11.90.153:order-service:8082 (replication=false)
+2025-08-18T15:00:18.640Z  WARN 124044 --- [discovery-service] [nio-8761-exec-8] c.n.e.registry.AbstractInstanceRegistry  : DS: Registry: cancel failed because Lease is not registered for: PRODUCT-SERVICE/11.11.90.153:order-service:8082
+2025-08-18T15:00:18.640Z  INFO 124044 --- [discovery-service] [nio-8761-exec-8] c.n.eureka.resources.InstanceResource    : Not Found (Cancel): PRODUCT-SERVICE - 11.11.90.153:order-service:8082
+2025-08-18T15:00:18.642Z  WARN 124044 --- [discovery-service] [get_localhost-3] c.n.eureka.cluster.ReplicationTask       : The replication of task PRODUCT-SERVICE/11.11.90.153:order-service:8082:Cancel@localhost failed with response code 404
+2025-08-18T15:00:18.642Z  WARN 124044 --- [discovery-service] [get_localhost-3] c.netflix.eureka.cluster.PeerEurekaNode  : PRODUCT-SERVICE/11.11.90.153:order-service:8082:Cancel@localhost: missing entry.
+2025-08-18T15:00:26.068Z  INFO 124044 --- [discovery-service] [io-8761-exec-10] c.n.e.registry.AbstractInstanceRegistry  : Registered instance USER-SERVICE/11.11.90.153:user-service:8081 with status UP (replication=false)
+2025-08-18T15:00:26.584Z  INFO 124044 --- [discovery-service] [nio-8761-exec-1] c.n.e.registry.AbstractInstanceRegistry  : Registered instance USER-SERVICE/11.11.90.153:user-service:8081 with status UP (replication=true)
+2025-08-18T15:01:03.082Z  INFO 124044 --- [discovery-service] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2025-08-18T15:01:27.061Z  INFO 124044 --- [discovery-service] [nio-8761-exec-8] c.n.e.registry.AbstractInstanceRegistry  : Registered instance USER-SERVICE/11.11.90.153:user-service:8081 with status DOWN (replication=false)
+2025-08-18T15:01:27.569Z  INFO 124044 --- [discovery-service] [nio-8761-exec-9] c.n.e.registry.AbstractInstanceRegistry  : Registered instance USER-SERVICE/11.11.90.153:user-service:8081 with status DOWN (replication=true)
+2025-08-18T15:01:30.077Z  INFO 124044 --- [discovery-service] [io-8761-exec-10] c.n.e.registry.AbstractInstanceRegistry  : Cancelled instance USER-SERVICE/11.11.90.153:user-service:8081 (replication=false)
+2025-08-18T15:01:30.586Z  WARN 124044 --- [discovery-service] [nio-8761-exec-3] c.n.e.registry.AbstractInstanceRegistry  : DS: Registry: cancel failed because Lease is not registered for: USER-SERVICE/11.11.90.153:user-service:8081
+2025-08-18T15:01:30.586Z  INFO 124044 --- [discovery-service] [nio-8761-exec-3] c.n.eureka.resources.InstanceResource    : Not Found (Cancel): USER-SERVICE - 11.11.90.153:user-service:8081
+2025-08-18T15:01:30.588Z  WARN 124044 --- [discovery-service] [et_localhost-14] c.n.eureka.cluster.ReplicationTask       : The replication of task USER-SERVICE/11.11.90.153:user-service:8081:Cancel@localhost failed with response code 404
+2025-08-18T15:01:30.588Z  WARN 124044 --- [discovery-service] [et_localhost-14] c.netflix.eureka.cluster.PeerEurekaNode  : USER-SERVICE/11.11.90.153:user-service:8081:Cancel@localhost: missing entry.
+2025-08-18T15:02:03.082Z  INFO 124044 --- [discovery-service] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2025-08-18T15:02:09.903Z  INFO 124044 --- [discovery-service] [nio-8761-exec-6] c.n.e.registry.AbstractInstanceRegistry  : Registered instance USER-SERVICE/11.11.90.153:user-service:8081 with status UP (replication=false)
+2025-08-18T15:02:10.421Z  INFO 124044 --- [discovery-service] [nio-8761-exec-7] c.n.e.registry.AbstractInstanceRegistry  : Registered instance USER-SERVICE/11.11.90.153:user-service:8081 with status UP (replication=true)
+2025-08-18T15:02:13.861Z  INFO 124044 --- [discovery-service] [nio-8761-exec-8] c.n.e.registry.AbstractInstanceRegistry  : Registered instance USER-SERVICE/11.11.90.153:user-service:8081 with status DOWN (replication=false)
+2025-08-18T15:02:14.373Z  INFO 124044 --- [discovery-service] [nio-8761-exec-9] c.n.e.registry.AbstractInstanceRegistry  : Registered instance USER-SERVICE/11.11.90.153:user-service:8081 with status DOWN (replication=true)
+2025-08-18T15:02:16.879Z  INFO 124044 --- [discovery-service] [io-8761-exec-10] c.n.e.registry.AbstractInstanceRegistry  : Cancelled instance USER-SERVICE/11.11.90.153:user-service:8081 (replication=false)
+2025-08-18T15:02:17.387Z  WARN 124044 --- [discovery-service] [nio-8761-exec-3] c.n.e.registry.AbstractInstanceRegistry  : DS: Registry: cancel failed because Lease is not registered for: USER-SERVICE/11.11.90.153:user-service:8081
+2025-08-18T15:02:17.388Z  INFO 124044 --- [discovery-service] [nio-8761-exec-3] c.n.eureka.resources.InstanceResource    : Not Found (Cancel): USER-SERVICE - 11.11.90.153:user-service:8081
+2025-08-18T15:02:17.390Z  WARN 124044 --- [discovery-service] [et_localhost-14] c.n.eureka.cluster.ReplicationTask       : The replication of task USER-SERVICE/11.11.90.153:user-service:8081:Cancel@localhost failed with response code 404
+2025-08-18T15:02:17.390Z  WARN 124044 --- [discovery-service] [et_localhost-14] c.netflix.eureka.cluster.PeerEurekaNode  : USER-SERVICE/11.11.90.153:user-service:8081:Cancel@localhost: missing entry.
+2025-08-18T15:02:38.834Z  INFO 124044 --- [discovery-service] [nio-8761-exec-5] c.n.e.registry.AbstractInstanceRegistry  : Registered instance USER-SERVICE/11.11.90.153:user-service:8081 with status UP (replication=false)
+2025-08-18T15:02:39.346Z  INFO 124044 --- [discovery-service] [nio-8761-exec-6] c.n.e.registry.AbstractInstanceRegistry  : Registered instance USER-SERVICE/11.11.90.153:user-service:8081 with status UP (replication=true)
+2025-08-18T15:03:03.050Z  INFO 124044 --- [discovery-service] [nio-8761-exec-7] c.n.e.registry.AbstractInstanceRegistry  : Registered instance USER-SERVICE/11.11.90.153:user-service:8081 with status DOWN (replication=false)
+2025-08-18T15:03:03.082Z  INFO 124044 --- [discovery-service] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2025-08-18T15:03:03.564Z  INFO 124044 --- [discovery-service] [nio-8761-exec-8] c.n.e.registry.AbstractInstanceRegistry  : Registered instance USER-SERVICE/11.11.90.153:user-service:8081 with status DOWN (replication=true)
+2025-08-18T15:03:06.075Z  INFO 124044 --- [discovery-service] [nio-8761-exec-9] c.n.e.registry.AbstractInstanceRegistry  : Cancelled instance USER-SERVICE/11.11.90.153:user-service:8081 (replication=false)
+2025-08-18T15:03:06.588Z  WARN 124044 --- [discovery-service] [nio-8761-exec-2] c.n.e.registry.AbstractInstanceRegistry  : DS: Registry: cancel failed because Lease is not registered for: USER-SERVICE/11.11.90.153:user-service:8081
+2025-08-18T15:03:06.588Z  INFO 124044 --- [discovery-service] [nio-8761-exec-2] c.n.eureka.resources.InstanceResource    : Not Found (Cancel): USER-SERVICE - 11.11.90.153:user-service:8081
+2025-08-18T15:03:06.591Z  WARN 124044 --- [discovery-service] [get_localhost-4] c.n.eureka.cluster.ReplicationTask       : The replication of task USER-SERVICE/11.11.90.153:user-service:8081:Cancel@localhost failed with response code 404
+2025-08-18T15:03:06.591Z  WARN 124044 --- [discovery-service] [get_localhost-4] c.netflix.eureka.cluster.PeerEurekaNode  : USER-SERVICE/11.11.90.153:user-service:8081:Cancel@localhost: missing entry.
+2025-08-18T15:04:03.082Z  INFO 124044 --- [discovery-service] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2025-08-18T15:05:03.082Z  INFO 124044 --- [discovery-service] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2025-08-18T15:05:19.815Z  INFO 124044 --- [discovery-service] [nio-8761-exec-5] c.n.e.registry.AbstractInstanceRegistry  : Registered instance CONFIG-SERVICE/11.11.90.153:config-service:8888 with status UP (replication=false)
+2025-08-18T15:05:20.326Z  INFO 124044 --- [discovery-service] [nio-8761-exec-6] c.n.e.registry.AbstractInstanceRegistry  : Registered instance CONFIG-SERVICE/11.11.90.153:config-service:8888 with status UP (replication=true)
+2025-08-18T15:05:20.335Z  INFO 124044 --- [discovery-service] [nio-8761-exec-7] c.n.e.registry.AbstractInstanceRegistry  : Registered instance CONFIG-SERVICE/11.11.90.153:config-service:8888 with status DOWN (replication=false)
+2025-08-18T15:05:20.341Z  INFO 124044 --- [discovery-service] [nio-8761-exec-8] c.n.e.registry.AbstractInstanceRegistry  : Cancelled instance CONFIG-SERVICE/11.11.90.153:config-service:8888 (replication=false)
+2025-08-18T15:05:20.843Z  INFO 124044 --- [discovery-service] [io-8761-exec-10] c.n.e.registry.AbstractInstanceRegistry  : Registered instance CONFIG-SERVICE/11.11.90.153:config-service:8888 with status DOWN (replication=true)
+2025-08-18T15:05:20.843Z  INFO 124044 --- [discovery-service] [io-8761-exec-10] c.n.e.registry.AbstractInstanceRegistry  : Cancelled instance CONFIG-SERVICE/11.11.90.153:config-service:8888 (replication=true)
+2025-08-18T15:05:24.124Z  INFO 124044 --- [discovery-service] [nio-8761-exec-3] c.n.e.registry.AbstractInstanceRegistry  : Registered instance CONFIG-SERVICE/11.11.90.153:config-service:8888 with status UP (replication=false)
+2025-08-18T15:05:24.639Z  INFO 124044 --- [discovery-service] [nio-8761-exec-4] c.n.e.registry.AbstractInstanceRegistry  : Registered instance CONFIG-SERVICE/11.11.90.153:config-service:8888 with status UP (replication=true)
+2025-08-18T15:06:03.082Z  INFO 124044 --- [discovery-service] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 0ms
+2025-08-18T15:06:50.890Z  INFO 124044 --- [discovery-service] [ionShutdownHook] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application DISCOVERY-SERVICE with eureka with status DOWN
+2025-08-18T15:06:50.893Z  INFO 124044 --- [discovery-service] [ionShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-18T15:06:50.895Z  INFO 124044 --- [discovery-service] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-08-18T15:06:50.898Z  INFO 124044 --- [discovery-service] [ionShutdownHook] o.s.c.n.e.server.EurekaServerBootstrap   : Shutting down Eureka Server..
+2025-08-18T15:06:50.899Z  INFO 124044 --- [discovery-service] [ionShutdownHook] c.n.eureka.DefaultEurekaServerContext    : Shutting down ...
+2025-08-18T15:06:50.904Z  INFO 124044 --- [discovery-service] [ionShutdownHook] c.n.eureka.DefaultEurekaServerContext    : Shut down
+2025-08-18T15:06:50.904Z  INFO 124044 --- [discovery-service] [ionShutdownHook] o.s.c.n.e.server.EurekaServerBootstrap   : Eureka Service is now shutdown...
+2025-08-18T15:06:50.899Z ERROR 124044 --- [discovery-service] [t-Conn-Cleaner2] c.n.d.s.t.j.EurekaJersey3ClientImpl      : Cannot clean connections
+
+java.lang.IllegalStateException: Client instance has been closed.
+	at org.glassfish.jersey.internal.guava.Preconditions.checkState(Preconditions.java:169) ~[jersey-common-3.1.10.jar:na]
+	at org.glassfish.jersey.client.JerseyClient.checkNotClosed(JerseyClient.java:248) ~[jersey-client-3.1.10.jar:na]
+	at org.glassfish.jersey.client.JerseyClient.getConfiguration(JerseyClient.java:363) ~[jersey-client-3.1.10.jar:na]
+	at org.glassfish.jersey.client.JerseyClient.getConfiguration(JerseyClient.java:54) ~[jersey-client-3.1.10.jar:na]
+	at com.netflix.discovery.shared.transport.jersey3.EurekaJersey3ClientImpl$ConnectionCleanerTask.run(EurekaJersey3ClientImpl.java:338) ~[eureka-client-jersey3-2.0.4.jar:2.0.4]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572) ~[na:na]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[na:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+
+2025-08-18T15:06:50.905Z  INFO 124044 --- [discovery-service] [ionShutdownHook] c.n.eureka.DefaultEurekaServerContext    : Shutting down ...
+2025-08-18T15:06:50.906Z  INFO 124044 --- [discovery-service] [ionShutdownHook] c.n.eureka.DefaultEurekaServerContext    : Shut down
+2025-08-18T15:06:50.910Z  INFO 124044 --- [discovery-service] [ionShutdownHook] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2025-08-18T15:06:50.910Z  INFO 124044 --- [discovery-service] [ionShutdownHook] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient

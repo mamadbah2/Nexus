@@ -1,0 +1,182 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <!-- Logo/Brand -->
+    <div class="navbar-brand">
+      <a routerLink="/" class="brand-link">
+        <lucide-icon [img]="ShoppingCart" class="brand-icon"></lucide-icon>
+        <span class="brand-text">Buy-02</span>
+      </a>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <div class="navbar-nav desktop-nav">
+      <!-- Empty middle section for clean design -->
+    </div>
+
+    <!-- User Actions -->
+    <div class="navbar-actions desktop-nav">
+      <ng-container *ngIf="isLoggedIn; else loginButton">
+        
+        <!-- Wishlist -->
+        <a routerLink="/wishlist" class="action-btn" title="Wishlist">
+          <lucide-icon [img]="Heart" class="action-icon"></lucide-icon>
+        </a>
+
+        <!-- Cart -->
+        <a routerLink="/cart" class="action-btn" title="Cart">
+          <lucide-icon [img]="ShoppingCart" class="action-icon"></lucide-icon>
+        </a>
+
+        <!-- Orders -->
+        <a routerLink="/orders" class="action-btn" title="My Orders">
+           <lucide-icon [img]="ShoppingBag" class="action-icon"></lucide-icon>
+        </a>
+
+        <!-- User Profile Dropdown -->
+        <div class="user-profile">
+          <div class="dropdown">
+            <button class="profile-btn" (click)="toggleDropdown()">
+              <lucide-icon [img]="User" class="profile-icon"></lucide-icon>
+              <span class="profile-name">Account</span>
+            </button>
+            <div class="dropdown-menu" [class.show]="isDropdownOpen">
+              <!-- Common Navigation -->
+              <a routerLink="/products" class="dropdown-item" (click)="closeDropdown()">
+                <lucide-icon [img]="Home" class="dropdown-icon"></lucide-icon>
+                Products
+              </a>
+
+              <!-- My Account Link -->
+              <a routerLink="/seller/my-account" class="dropdown-item" (click)="closeDropdown()">
+                <lucide-icon [img]="User" class="dropdown-icon"></lucide-icon>
+                My Account
+              </a>
+
+              <!-- Seller Specific Navigation -->
+              <ng-container *ngIf="isSeller">
+                <div class="dropdown-divider"></div>
+                <a routerLink="/seller/my-products" class="dropdown-item" (click)="closeDropdown()">
+                  <lucide-icon [img]="Package" class="dropdown-icon"></lucide-icon>
+                  My Products
+                </a>
+                <a routerLink="/seller/orders" class="dropdown-item" (click)="closeDropdown()">
+                  <lucide-icon [img]="ShoppingBag" class="dropdown-icon"></lucide-icon>
+                  Received Orders
+                </a>
+              </ng-container>
+
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item logout-item" (click)="logout()">
+                <lucide-icon [img]="LogOut" class="dropdown-icon"></lucide-icon>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #loginButton>
+        <button class="login-btn" (click)="login()">
+          <lucide-icon [img]="User" class="login-icon"></lucide-icon>
+          <span>Login</span>
+        </button>
+      </ng-template>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle"
+            (click)="toggleMobileMenu()"
+            [class.active]="isMenuOpen">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav" [class.open]="isMenuOpen">
+    <div class="mobile-nav-content">
+      <!-- Mobile User Actions -->
+      <div class="mobile-user-actions">
+        <ng-container *ngIf="isLoggedIn; else mobileLoginButton">
+          <!-- Common Navigation -->
+          <a routerLink="/products"
+             routerLinkActive="active"
+             class="mobile-nav-link"
+             (click)="navigateToProducts()">
+            <lucide-icon [img]="Home" class="nav-icon"></lucide-icon>
+            <span>Products</span>
+          </a>
+
+          <a routerLink="/cart"
+             routerLinkActive="active"
+             class="mobile-nav-link"
+             (click)="closeMobileMenu()">
+            <lucide-icon [img]="ShoppingCart" class="nav-icon"></lucide-icon>
+            <span>Cart</span>
+          </a>
+
+          <a routerLink="/wishlist"
+             routerLinkActive="active"
+             class="mobile-nav-link"
+             (click)="closeMobileMenu()">
+            <lucide-icon [img]="Heart" class="nav-icon"></lucide-icon>
+            <span>Wishlist</span>
+          </a>
+
+          <a routerLink="/orders"
+             routerLinkActive="active"
+             class="mobile-nav-link"
+             (click)="closeMobileMenu()">
+            <lucide-icon [img]="ShoppingBag" class="nav-icon"></lucide-icon>
+            <span>My Orders</span>
+          </a>
+
+          <!-- My Account Link -->
+          <a routerLink="/seller/my-account"
+             routerLinkActive="active"
+             class="mobile-nav-link"
+             (click)="closeMobileMenu()">
+            <lucide-icon [img]="User" class="nav-icon"></lucide-icon>
+            <span>My Account</span>
+          </a>
+
+          <!-- Seller Specific Navigation in Mobile -->
+          <ng-container *ngIf="isSeller">
+            <a routerLink="/seller/my-orders"
+               routerLinkActive="active"
+               class="mobile-nav-link"
+               (click)="navigateToMyProducts()">
+              <lucide-icon [img]="Package" class="nav-icon"></lucide-icon>
+              <span>My Products</span>
+            </a>
+          </ng-container>
+
+          <button class="mobile-logout-btn" (click)="logout()">
+            <lucide-icon [img]="LogOut" class="nav-icon"></lucide-icon>
+            <span>Logout</span>
+          </button>
+        </ng-container>
+        <ng-template #mobileLoginButton>
+          <!-- Products link for guests -->
+          <a routerLink="/orders"
+             routerLinkActive="active"
+             class="mobile-nav-link"
+             (click)="navigateToProducts()">
+            <lucide-icon [img]="Home" class="nav-icon"></lucide-icon>
+            <span>Products</span>
+          </a>
+
+          <button class="mobile-login-btn" (click)="login()">
+            <lucide-icon [img]="User" class="nav-icon"></lucide-icon>
+            <span>Login</span>
+          </button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-overlay"
+       [class.active]="isMenuOpen"
+       (click)="closeMobileMenu()"></div>
+</nav>

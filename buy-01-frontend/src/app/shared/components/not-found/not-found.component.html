@@ -1,0 +1,60 @@
+<main class="not-found-container" role="main" aria-labelledby="error-title">
+  <div class="not-found-content animate-slideInUp">
+      <header class="error-illustration">
+        <div class="error-number" aria-hidden="true">404</div>
+        <div class="error-icon" aria-hidden="true">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="m9 9 6 6"></path>
+            <path d="m15 9-6 6"></path>
+          </svg>
+        </div>
+      </header>
+
+      <section class="error-text">
+        <h1 id="error-title" class="error-title">Page Not Found</h1>
+        <p class="error-message">
+          Sorry, the page you're looking for doesn't exist or has been moved.
+        </p>
+      </section>
+
+      <section class="error-actions">
+        <button class="btn btn-primary" (click)="goHome()" type="button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9,22 9,12 15,12 15,22"></polyline>
+          </svg>
+          Go Home
+        </button>
+
+        <button class="btn btn-secondary" (click)="goBack()" type="button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12,19 5,12 12,5"></polyline>
+          </svg>
+          Go Back
+        </button>
+
+        <a routerLink="/orders" class="btn btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          Browse Products
+        </a>
+      </section>
+
+      <aside class="helpful-links">
+        <h3>You might be looking for:</h3>
+        <nav>
+          <ul>
+            <li><a routerLink="/orders">All Products</a></li>
+            <li><a routerLink="/auth">Sign In / Sign Up</a></li>
+            <li><a routerLink="/seller/my-orders">My Products (Sellers)</a></li>
+          </ul>
+        </nav>
+      </aside>
+    </div>
+</main>

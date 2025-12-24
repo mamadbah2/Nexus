@@ -1,0 +1,190 @@
+<div class="create-order-container">
+  <!-- Header -->
+  <div class="header">
+    <div class="header-content">
+      <button class="back-button" (click)="goBack()" type="button">
+        <lucide-icon [img]="X" class="back-icon"></lucide-icon>
+        Back to Products
+      </button>
+      <h1 class="page-title">Create New Product</h1>
+      <p class="page-subtitle">Add a new order to your store</p>
+    </div>
+  </div>
+
+  <!-- Form Container -->
+  <div class="form-container">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="order-form">
+      <!-- Product Information Section -->
+      <div class="form-section">
+        <h2 class="section-title">Product Information</h2>
+
+        <!-- Product Name -->
+        <div class="form-group">
+          <label for="name" class="form-label">Product Name *</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            class="form-input"
+            [class.error]="isFieldInvalid('name')"
+            placeholder="Enter order name">
+          <div class="error-message" *ngIf="isFieldInvalid('name')">
+            {{ getFieldError('name') }}
+          </div>
+        </div>
+
+        <!-- Product Description -->
+        <div class="form-group">
+          <label for="description" class="form-label">Description *</label>
+          <textarea
+            id="description"
+            formControlName="description"
+            class="form-textarea"
+            [class.error]="isFieldInvalid('description')"
+            placeholder="Describe your order in detail..."
+            rows="4"></textarea>
+          <div class="error-message" *ngIf="isFieldInvalid('description')">
+            {{ getFieldError('description') }}
+          </div>
+        </div>
+
+        <!-- Price and Quantity Row -->
+        <div class="form-row">
+          <!-- Price -->
+          <div class="form-group">
+            <label for="price" class="form-label">Price (XOF) *</label>
+            <div class="input-wrapper">
+              <input
+                type="number"
+                id="price"
+                formControlName="price"
+                class="form-input"
+                [class.error]="isFieldInvalid('price')"
+                placeholder="0"
+                min="1"
+                step="1">
+              <span class="currency-suffix">XOF</span>
+            </div>
+            <div class="error-message" *ngIf="isFieldInvalid('price')">
+              {{ getFieldError('price') }}
+            </div>
+          </div>
+
+          <!-- Quantity -->
+          <div class="form-group">
+            <label for="quantity" class="form-label">Quantity *</label>
+            <input
+              type="number"
+              id="quantity"
+              formControlName="quantity"
+              class="form-input"
+              [class.error]="isFieldInvalid('quantity')"
+              placeholder="0"
+              min="1"
+              step="1">
+            <div class="error-message" *ngIf="isFieldInvalid('quantity')">
+              {{ getFieldError('quantity') }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Images Section -->
+      <div class="form-section">
+        <h2 class="section-title">Product Images</h2>
+        <p class="section-description">Upload high-quality images of your order. You can add up to {{ MAX_FILES }} images.</p>
+
+        <!-- File Restrictions Info -->
+        <div class="file-restrictions">
+          <div class="restriction-item">
+            <span class="restriction-icon">📁</span>
+            <span class="restriction-text">Maximum {{ MAX_FILES }} images</span>
+          </div>
+          <div class="restriction-item">
+            <span class="restriction-icon">📏</span>
+            <span class="restriction-text">Max 5MB per file</span>
+          </div>
+          <div class="restriction-item">
+            <span class="restriction-icon">🖼️</span>
+            <span class="restriction-text">JPEG, PNG, WebP only</span>
+          </div>
+          <div class="restriction-item" *ngIf="selectedImages.length > 0">
+            <span class="restriction-icon">✅</span>
+            <span class="restriction-text">{{ selectedImages.length }}/{{ MAX_FILES }} images selected</span>
+          </div>
+        </div>
+
+        <!-- Image Upload Area -->
+        <div class="image-upload-area" [class.disabled]="!canAddMoreImages">
+          <input
+            type="file"
+            id="images"
+            multiple
+            accept="image/jpeg,image/jpg,image/png,image/webp"
+            (change)="onImageSelect($event)"
+            [disabled]="!canAddMoreImages"
+            class="file-input">
+
+          <label for="images" class="upload-label" [class.disabled]="!canAddMoreImages">
+            <div class="upload-content">
+              <lucide-icon [img]="Upload" class="upload-icon"></lucide-icon>
+              <div class="upload-text">
+                <span class="upload-title">Click to upload images</span>
+                <span class="upload-subtitle">JPEG, PNG, WebP up to 5MB each</span>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <!-- Image Previews -->
+        <div class="image-previews" *ngIf="imagePreviewUrls.length > 0">
+          <h3 class="preview-title">Selected Images ({{ imagePreviewUrls.length }})</h3>
+          <div class="preview-grid">
+            <div class="image-preview" *ngFor="let url of imagePreviewUrls; let i = index">
+              <img [src]="url" [alt]="'Product image ' + (i + 1)" class="preview-image">
+              <button
+                type="button"
+                class="remove-image"
+                (click)="removeImage(i)"
+                [title]="'Remove image ' + (i + 1)">
+                <lucide-icon [img]="X" class="remove-icon"></lucide-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Upload Status -->
+        <div class="upload-status" *ngIf="selectedImages.length === 0">
+          <div class="status-message warning">
+            <span class="status-icon">⚠️</span>
+            <span class="status-text">At least one image is required</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Error -->
+      <div class="alert alert-error" *ngIf="submitError">
+        {{ submitError }}
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="goBack()"
+          [disabled]="isSubmitting">
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!productForm.valid || selectedImages.length === 0 || isSubmitting">
+          <lucide-icon [img]="Save" class="btn-icon" *ngIf="!isSubmitting"></lucide-icon>
+          <div class="spinner" *ngIf="isSubmitting"></div>
+          {{ isSubmitting ? 'Creating...' : 'Create Product' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

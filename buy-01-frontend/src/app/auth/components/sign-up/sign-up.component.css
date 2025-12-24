@@ -1,0 +1,49 @@
+.file-upload-container {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 300px;
+  margin: 7px 0;
+}
+
+/* Masque l'input file original */
+.file-upload-input {
+  display: none;
+}
+
+/* Style le label (qui agit comme le bouton) */
+.file-upload-label {
+  display: inline-block; /* Permet d'appliquer padding, margin, etc. */
+  background-color: #333; /* Bouton noir */
+  color: #fff; /* Texte blanc */
+  padding: 12px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  user-select: none; /* Empêche la sélection du texte */
+  margin-bottom: 15px;
+  border: 2px solid #333; /* Bordure pour l'effet de survol */
+}
+
+.file-upload-label:hover {
+  background-color: #555; /* Assombrit légèrement au survol */
+  transform: translateY(-2px); /* Petit effet de soulèvement */
+}
+
+.file-upload-label:active {
+  background-color: #111; /* Couleur plus foncée quand cliqué */
+  transform: translateY(0);
+}
+
+/* Style pour le texte affichant le nom du fichier */
+.file-upload-filename {
+  color: #666; /* Gris foncé pour le nom du fichier */
+  font-size: 0.9em;
+  font-style: italic;
+  min-height: 18px; /* Pour éviter le saut de mise en page si aucun fichier */
+}
