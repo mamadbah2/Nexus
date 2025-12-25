@@ -14,14 +14,14 @@ import { SearchVoiceComponent } from '../search-voice/search-voice.component';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit, OnDestroy {
-  @Output() search = new EventEmitter<string>();
+  @Output() valueSearch = new EventEmitter<string>();
   
   searchControl = new FormControl('');
   suggestions: string[] = [];
   showSuggestions = false;
   
-  private productService = inject(ProductService);
-  private destroy$ = new Subject<void>();
+  private readonly productService = inject(ProductService);
+  private readonly destroy$ = new Subject<void>();
 
   ngOnInit() {
     // Handle suggestions while typing
@@ -49,14 +49,14 @@ export class SearchComponent implements OnInit, OnDestroy {
   // Triggered by Enter key or Search button
   onSearch() {
     this.showSuggestions = false;
-    this.search.emit(this.searchControl.value || '');
+    this.valueSearch.emit(this.searchControl.value || '');
   }
 
   // Triggered when clicking a suggestion
   selectSuggestion(suggestion: string) {
     this.searchControl.setValue(suggestion, { emitEvent: false });
     this.showSuggestions = false;
-    this.search.emit(suggestion);
+    this.valueSearch.emit(suggestion);
   }
 
   onBlur() {

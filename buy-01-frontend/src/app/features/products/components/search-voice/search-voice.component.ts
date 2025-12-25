@@ -11,15 +11,15 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./search-voice.component.css']
 })
 export class SearchVoiceComponent implements OnDestroy {
-  @Output() search = new EventEmitter<string>();
+  @Output() valueSearch = new EventEmitter<string>();
 
   isRecording = false;
   isProcessing = false;
   mediaRecorder: MediaRecorder | null = null;
   audioChunks: Blob[] = [];
   
-  private productService = inject(ProductService);
-  private destroy$ = new Subject<void>();
+  private readonly productService = inject(ProductService);
+  private readonly destroy$ = new Subject<void>();
 
   async startRecording() {
     try {
@@ -34,7 +34,11 @@ export class SearchVoiceComponent implements OnDestroy {
       this.mediaRecorder.onstop = () => {
         const audioBlob = new Blob(this.audioChunks, { type: 'audio/wav' });
         this.sendAudio(audioBlob);
-        stream.getTracks().forEach(track => track.stop());
+        //stream.getTracks().forEach(track => track.stop());
+        // instead we use for of
+        for (const track of stream.getTracks()) {
+          track.stop();
+        }
       };
 
       this.mediaRecorder.start();
@@ -64,7 +68,7 @@ export class SearchVoiceComponent implements OnDestroy {
           console.log('Translation:', response.translation);
           console.log('-------------------------------------------------');
           if (response.transcription) {
-            this.search.emit(response.transcription);
+            this.valueSearch.emit(response.transcription);
           }
         },
         error: (error) => {
