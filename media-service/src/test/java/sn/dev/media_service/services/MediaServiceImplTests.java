@@ -7,7 +7,6 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import sn.dev.media_service.data.entities.Media;
 import sn.dev.media_service.data.repos.MediaRepo;
-import sn.dev.media_service.services.CloudStorageService;
 import sn.dev.media_service.services.impl.MediaServiceImpl;
 
 import java.util.Arrays;
@@ -17,7 +16,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class MediaServiceImplTests {
+class MediaServiceImplTests {
 
     private MediaRepo mediaRepo;
     private CloudStorageService cloudStorageService;

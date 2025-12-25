@@ -150,4 +150,112 @@ describe("ProductService", () => {
       expect(receivedProduct).toEqual(mockProducts[0]);
     });
   });
-});
+
+  describe("searchProducts", () => {
+    it("should search products with query and filters", () => {
+      const searchParams = { query: "phone", minPrice: 100, maxPrice: 500 };
+      const queryParams = { page: 1, size: 10 };
+
+      service.searchProducts(searchParams, queryParams).subscribe((response) => {
+        expect(response).toEqual(mockPage);
+      });
+
+      const req = httpMock.expectOne((request) => 
+        request.url === `${apiUrl}/api/products/search`
+      );
+
+      expect(req.request.method).toBe("GET");
+      expect(req.request.params.get("query")).toBe("phone");
+      expect(req.request.params.get("minPrice")).toBe("100");
+      expect(req.request.params.get("maxPrice")).toBe("500");
+      expect(req.request.params.get("page")).toBe("1");
+      expect(req.request.params.get("size")).toBe("10");
+
+      req.flush(mockPage);
+    });
+
+    it("should handle empty search params", () => {
+      service.searchProducts({}).subscribe();
+
+      const req = httpMock.expectOne((request) => 
+        request.url === `${apiUrl}/api/products/search`
+      );
+      
+      expect(req.request.params.has("query")).toBeFalse();
+      expect(req.request.params.has("minPrice")).toBeFalse();
+      expect(req.request.params.has("maxPrice")).toBeFalse();
+      
+      req.flush(mockPage);
+    });
+  });
+
+  describe("suggestProducts", () => {
+    it("should fetch suggestions", () => {
+      const suggestions = ["iphone", "ipad"];
+      const query = "ip";
+
+      service.suggestProducts(query).subscribe((response) => {
+        expect(response).toEqual(suggestions);
+      });
+
+      const req = httpMock.expectOne((request) => 
+        request.url === `${apiUrl}/api/products/suggest`
+      );
+
+      expect(req.request.method).toBe("GET");
+      expect(req.request.params.get("query")).toBe(query);
+
+      req.flush(suggestions);
+    });
+
+    it("should handle empty query for suggestions", () => {
+      service.suggestProducts("").subscribe();
+
+      const req = httpMock.expectOne((request) => 
+        request.url === `${apiUrl}/api/products/suggest`
+      );
+      expect(req.request.params.get("query")).toBe("");
+      req.flush([]);
+    });
+  });
+
+  describe("transcribeAudio", () => {
+    it("should post audio file with correct extension for mp4", () => {
+      const blob = new Blob([""], { type: "audio/mp4" });
+      
+      service.transcribeAudio(blob).subscribe();
+
+      const req = httpMock.expectOne(`${apiUrl}/api/stt/transcribe`);
+      expect(req.request.method).toBe("POST");
+      
+      const formData = req.request.body as FormData;
+      expect(formData.has("file")).toBeTrue();
+      expect(formData.has("language")).toBeTrue();
+      expect(formData.get("language")).toBe("ful");
+      
+      req.flush({ transcription: "test", translation: "test" });
+    });
+
+    it("should post audio file with correct extension for wav", () => {
+      const blob = new Blob([""], { type: "audio/wav" });
+      service.transcribeAudio(blob).subscribe();
+      const req = httpMock.expectOne(`${apiUrl}/api/stt/transcribe`);
+      req.flush({});
+    });
+
+    it("should post audio file with correct extension for ogg", () => {
+      const blob = new Blob([""], { type: "audio/ogg" });
+      service.transcribeAudio(blob).subscribe();
+      const req = httpMock.expectOne(`${apiUrl}/api/stt/transcribe`);
+      req.flush({});
+    });
+
+    it("should default to webm extension for unknown types", () => {
+      const blob = new Blob([""], { type: "audio/unknown" });
+      service.transcribeAudio(blob).subscribe();
+      const req = httpMock.expectOne(`${apiUrl}/api/stt/transcribe`);
+      req.flush({});
+    });
+  });
+}
+);

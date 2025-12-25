@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SearchVoiceComponent } from './search-voice.component';
 import { ProductService } from '../../services/product.service';
-import { throwError } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 describe('SearchVoiceComponent', () => {
   let component: SearchVoiceComponent;
@@ -22,6 +22,12 @@ describe('SearchVoiceComponent', () => {
       if (this.onstop) {
         this.onstop();
       }
+    }
+    // Helper to simulate data available
+    simulateDataAvailable(data: Blob) {
+        if (this.ondataavailable) {
+            this.ondataavailable({ data: data } as any);
+        }
     }
   }
 
@@ -62,6 +68,17 @@ describe('SearchVoiceComponent', () => {
     expect(navigator.mediaDevices.getUserMedia).toHaveBeenCalled();
   });
 
+  it('should accumulate audio chunks', async () => {
+    await component.startRecording();
+    const mockRecorder = component.mediaRecorder as any;
+    const mockBlob = new Blob(['test'], { type: 'audio/wav' });
+    
+    mockRecorder.simulateDataAvailable(mockBlob);
+    
+    expect(component.audioChunks.length).toBe(1);
+    expect(component.audioChunks[0]).toBe(mockBlob);
+  });
+
   it('should stop recording and process audio', async () => {
     await component.startRecording();
     
@@ -75,6 +92,19 @@ describe('SearchVoiceComponent', () => {
     expect(component.sendAudio).toHaveBeenCalled();
   });
 
+  it('should send audio and emit transcription on success', () => {
+    const mockResponse = { transcription: 'arou yama', translation: 'viens manger', language: 'eng', duration: 2.5 };
+    productServiceSpy.transcribeAudio.and.returnValue(of(mockResponse));
+    spyOn(component.valueSearch, 'emit');
+
+    const blob = new Blob([''], { type: 'audio/wav' });
+    component.sendAudio(blob);
+
+    expect(productServiceSpy.transcribeAudio).toHaveBeenCalledWith(blob);
+    expect(component.isProcessing).toBeFalse();
+    expect(component.valueSearch.emit).toHaveBeenCalledWith('arou yama');
+  });
+
   it('should handle transcription error', () => {
     productServiceSpy.transcribeAudio.and.returnValue(throwError(() => new Error('Error')));
     spyOn(globalThis, 'alert'); // Suppress alert
@@ -83,5 +113,6 @@ describe('SearchVoiceComponent', () => {
     component.sendAudio(blob);
 
     expect(component.isProcessing).toBeFalse();
+    // expect(window.alert).toHaveBeenCalled(); // Optional: check if alert was called
   });
 });
