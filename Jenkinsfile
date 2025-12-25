@@ -98,9 +98,9 @@ pipeline {
                                // Move the Sonar wrapper and credentials inside each parallel branch
                                withSonarQubeEnv('sonarqube_mamadbah') {
                                    withCredentials([string(credentialsId: 'SONAR_USER_TOKEN', variable: 'SONAR_USER_TOKEN')]) {
-                                       def jacocoOption = (svc in ['product-service','user-service','media-service']) ?
-                                           "-Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml" : ""
-
+                                      // def jacocoOption = (svc in ['product-service','user-service','media-service']) ?
+                                        //   "-Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml" : ""
+                                        def jacocoOption = "-Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml"
                                        sh """
                                            mvn sonar:sonar \
                                                -Dsonar.projectKey=sonar-${svc.replace('-service','')} \
