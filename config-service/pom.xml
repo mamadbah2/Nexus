@@ -5,12 +5,12 @@
 	<parent>
 		<groupId>sn.dev</groupId>
 		<artifactId>nexus</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.1</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<groupId>sn.dev</groupId>
 	<artifactId>config-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>config-service</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
