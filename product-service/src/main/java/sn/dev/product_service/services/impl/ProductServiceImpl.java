@@ -1,7 +1,6 @@
 package sn.dev.product_service.services.impl;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
