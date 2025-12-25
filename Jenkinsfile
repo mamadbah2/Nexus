@@ -161,9 +161,9 @@ pipeline {
 
         stage('Publish Artifacts to Nexus') {
             steps {
-                // Envoie les JARs vers maven-releases/snapshots
-                // On utilise le settings.xml configuré sur le serveur Jenkins
-                sh 'mvn deploy -DskipTests'
+                configFileProvider([configFile(fileId: 'mamadbah-nexus-settings-xml', variable: 'MAVEN_SETTINGS')]) {
+                    sh 'mvn deploy -s $MAVEN_SETTINGS -DskipTests'
+                }
             }
         }
 
