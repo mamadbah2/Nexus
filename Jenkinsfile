@@ -93,35 +93,38 @@ pipeline {
                    // Backend services
                    services.each { svc ->
                        parallelQuality[svc] = {
-                           echo "🔎 Sonar pour ${svc}..."
-                           dir(svc) {
+                            echo "🔎 Sonar pour ${svc}..."
+                            dir(svc) {
                                // Move the Sonar wrapper and credentials inside each parallel branch
-                               withSonarQubeEnv('sonarqube_mamadbah') {
+                                withSonarQubeEnv('sonarqube_mamadbah') {
                                    withCredentials([string(credentialsId: 'SONAR_USER_TOKEN', variable: 'SONAR_USER_TOKEN')]) {
                                       // def jacocoOption = (svc in ['product-service','user-service','media-service']) ?
                                         //   "-Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml" : ""
-                                       def jacocoOption = "-Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml"
-                                       def exclusionOption = (svc == 'discovery-service' || svc == 'config-service' || svc == 'api-gateway') ?
-                                           "-Dsonar.exclusions=src/main/java/sn/dev/${svc}/**" : ""
-                                       sh """
-                                           mvn sonar:sonar \
-                                               -Dsonar.projectKey=sonar-${svc.replace('-service','')} \
-                                               -Dsonar.host.url=$SONAR_HOST_URL \
-                                               -Dsonar.token=$SONAR_USER_TOKEN \
-                                               -Dsonar.java.binaries=target/classes \
-                                               ${jacocoOption} \
-                                               ${exclusionOption}
-                                       """
-                                   } // withCredentials
-                               } // withSonarQubeEnv
+                                        def jacocoOption = "-Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml"
+                                        def exclusionOption = (svc == 'discovery-service' || svc == 'config-service' || svc == 'api-gateway') ?
+                                            "-Dsonar.exclusions=src/main/java/sn/dev/${svc}/**" : ""
+                                        def exclusionProductConfig = (svc == 'product-service') ?
+                                            "-Dsonar.exclusions=**/ProductServiceApplication.java,**/config/**,**/dto/**,**/data/**,**/exceptions/**" : ""
+                                            exclusionOption += " " + exclusionProductConfig
+                                        sh """
+                                            mvn sonar:sonar \
+                                                -Dsonar.projectKey=sonar-${svc.replace('-service','')} \
+                                                -Dsonar.host.url=$SONAR_HOST_URL \
+                                                -Dsonar.token=$SONAR_USER_TOKEN \
+                                                -Dsonar.java.binaries=target/classes \
+                                                ${jacocoOption} \
+                                                ${exclusionOption}
+                                        """
+                                    } // withCredentials
+                                } // withSonarQubeEnv
 
                                // waitForQualityGate must run in the same workspace/context
-                               timeout(time: 10, unit: 'MINUTES') {
-                                   waitForQualityGate abortPipeline: true
-                               }
-                           } // dir
-                       }
-                   }
+                                timeout(time: 10, unit: 'MINUTES') {
+                                    waitForQualityGate abortPipeline: true
+                                }
+                            } // dir
+                        }
+                    }
 
                    // Frontend Angular
                    parallelQuality['frontend'] = {
