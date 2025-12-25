@@ -173,7 +173,7 @@ pipeline {
                 script {
                     // Login Nexus
                     withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
-                         sh 'echo $NEXUS_PASS | docker login $NEXUS_REGISTRY -u $NEXUS_USER --password-stdin'
+                         sh 'echo $NEXUS_PASS | docker login localhost:7072 -u $NEXUS_USER --password-stdin'
                     }
 
                     def services = ['eureka-server', 'config-service', 'api-gateway', 'product-service', 'user-service', 'media-service', 'order-service', 'frontend']
