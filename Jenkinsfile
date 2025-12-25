@@ -100,14 +100,17 @@ pipeline {
                                    withCredentials([string(credentialsId: 'SONAR_USER_TOKEN', variable: 'SONAR_USER_TOKEN')]) {
                                       // def jacocoOption = (svc in ['product-service','user-service','media-service']) ?
                                         //   "-Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml" : ""
-                                        def jacocoOption = "-Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml"
+                                       def jacocoOption = "-Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml"
+                                       def exclusionOption = (svc == 'discovery-service' || svc == 'config-service' || svc == 'api-gateway') ?
+                                           "-Dsonar.exclusions=src/main/java/sn/dev/${svc}/**" : ""
                                        sh """
                                            mvn sonar:sonar \
                                                -Dsonar.projectKey=sonar-${svc.replace('-service','')} \
                                                -Dsonar.host.url=$SONAR_HOST_URL \
                                                -Dsonar.token=$SONAR_USER_TOKEN \
                                                -Dsonar.java.binaries=target/classes \
-                                               ${jacocoOption}
+                                               ${jacocoOption} \
+                                               ${exclusionOption}
                                        """
                                    } // withCredentials
                                } // withSonarQubeEnv
