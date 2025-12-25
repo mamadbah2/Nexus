@@ -44,7 +44,7 @@ pipeline {
                 sh '''
                     # Nettoyer seulement les conteneurs et images de l'ancien build
                     docker compose down -v --remove-orphans || true
-                    docker images | grep "my_buy01_pipeline2" | grep -v "${IMAGE_VERSION}" | awk '{print $3}' | xargs -r docker rmi -f || true
+                    docker images | grep "my_nexus_pipeline" | grep -v "${IMAGE_VERSION}" | awk '{print $3}' | xargs -r docker rmi -f || true
                 '''
             }
         }
@@ -176,7 +176,7 @@ pipeline {
                     services.each { service ->
                         parallelBuilds[service] = {
                             def serviceDir = service == 'frontend' ? 'buy-01-frontend' : service.replace('eureka-server', 'discovery-service')
-                            def localTag = "my_buy01_pipeline2-${service}:latest"
+                            def localTag = "my_nexus_pipeline-${service}:latest"
                             def nexusTagVersion = "${NEXUS_REGISTRY}/buy02-${service}:${IMAGE_VERSION}"
                             def nexusTagLatest = "${NEXUS_REGISTRY}/buy02-${service}:latest"
 
@@ -263,7 +263,7 @@ pipeline {
 
                     services.each { service ->
                         parallelPushes[service] = {
-                            def localImageName = "my_buy01_pipeline2-${service}"
+                            def localImageName = "my_nexus_pipeline-${service}"
                             // Préfixer avec PROJECT_NAME pour éviter les conflits entre applications
                             def taggedImageName = "${DOCKER_HUB_USER}/${PROJECT_NAME}-${service}:${env.BUILD_NUMBER}"
                             def latestImageName = "${DOCKER_HUB_USER}/${PROJECT_NAME}-${service}:latest"
