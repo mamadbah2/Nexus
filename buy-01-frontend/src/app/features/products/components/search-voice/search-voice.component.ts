@@ -11,7 +11,7 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./search-voice.component.css']
 })
 export class SearchVoiceComponent implements OnDestroy {
-  @Output() valueSearch = new EventEmitter<string>();
+  @Output() search = new EventEmitter<string>();
 
   isRecording = false;
   isProcessing = false;
@@ -68,7 +68,7 @@ export class SearchVoiceComponent implements OnDestroy {
           console.log('Translation:', response.translation);
           console.log('-------------------------------------------------');
           if (response.transcription) {
-            this.valueSearch.emit(response.transcription);
+            this.search.emit(response.transcription);
           }
         },
         error: (error) => {

@@ -29,11 +29,11 @@ describe('SearchComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit valueSearch when onSearch is called', () => {
-    spyOn(component.valueSearch, 'emit');
+  it('should emit search when onSearch is called', () => {
+    spyOn(component.search, 'emit');
     component.searchControl.setValue('test query');
     component.onSearch();
-    expect(component.valueSearch.emit).toHaveBeenCalledWith('test query');
+    expect(component.search.emit).toHaveBeenCalledWith('test query');
     expect(component.showSuggestions).toBeFalse();
   });
 
@@ -58,14 +58,14 @@ describe('SearchComponent', () => {
   }));
 
   it('should select a suggestion and emit value', () => {
-    spyOn(component.valueSearch, 'emit');
+    spyOn(component.search, 'emit');
     const suggestion = 'banana';
     
     component.selectSuggestion(suggestion);
 
     expect(component.searchControl.value).toBe(suggestion);
     expect(component.showSuggestions).toBeFalse();
-    expect(component.valueSearch.emit).toHaveBeenCalledWith(suggestion);
+    expect(component.search.emit).toHaveBeenCalledWith(suggestion);
   });
 
   it('should handle voice search', () => {

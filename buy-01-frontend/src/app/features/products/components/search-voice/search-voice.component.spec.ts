@@ -95,14 +95,14 @@ describe('SearchVoiceComponent', () => {
   it('should send audio and emit transcription on success', () => {
     const mockResponse = { transcription: 'arou yama', translation: 'viens manger', language: 'eng', duration: 2.5 };
     productServiceSpy.transcribeAudio.and.returnValue(of(mockResponse));
-    spyOn(component.valueSearch, 'emit');
+    spyOn(component.search, 'emit');
 
     const blob = new Blob([''], { type: 'audio/wav' });
     component.sendAudio(blob);
 
     expect(productServiceSpy.transcribeAudio).toHaveBeenCalledWith(blob);
     expect(component.isProcessing).toBeFalse();
-    expect(component.valueSearch.emit).toHaveBeenCalledWith('arou yama');
+    expect(component.search.emit).toHaveBeenCalledWith('arou yama');
   });
 
   it('should handle transcription error', () => {
