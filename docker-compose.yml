@@ -21,8 +21,8 @@ services:
   eureka-server:
     <<: *spring-service-defaults
     build:
-      context: ./discovery-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./discovery-service/Dockerfile
     container_name: eureka-server
     ports:
       - "8761:8761"
@@ -35,8 +35,8 @@ services:
   config-service:
     <<: *spring-service-defaults
     build:
-      context: ./config-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./config-service/Dockerfile
     container_name: config-service
     ports:
       - "8888:8888"
@@ -55,8 +55,8 @@ services:
   media-service:
     <<: *spring-service-defaults
     build:
-      context: ./media-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./media-service/Dockerfile
     container_name: media-service
     ports:
       - "8083:8083"
@@ -82,8 +82,8 @@ services:
   product-service:
     <<: *spring-service-defaults
     build:
-      context: ./product-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./product-service/Dockerfile
     container_name: product-service
     ports:
       - "8082:8082"
@@ -109,8 +109,8 @@ services:
   order-service:
     <<: *spring-service-defaults
     build:
-      context: ./order-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./order-service/Dockerfile
     container_name: order-service
     ports:
       - "8084:8084"
@@ -136,8 +136,8 @@ services:
   user-service:
     <<: *spring-service-defaults
     build:
-      context: ./user-service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./user-service/Dockerfile
     container_name: user-service
     ports:
       - "8081:8081"
@@ -157,8 +157,8 @@ services:
   api-gateway:
     <<: *spring-service-defaults
     build:
-      context: ./api-gateway
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./api-gateway/Dockerfile
     container_name: api-gateway
     ports:
       - "5050:5050"
@@ -185,8 +185,8 @@ services:
 
   frontend:
     build:
-      context: ./buy-01-frontend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./buy-01-frontend/Dockerfile
     container_name: frontend
     ports:
       - "4200:80"
