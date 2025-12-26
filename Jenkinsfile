@@ -17,7 +17,7 @@ pipeline {
 
     environment {
         DOCKER_HUB_USER = 'mamadbah2'
-        NEXUS_REGISTRY = 'nexusbuy02.duckdns.org'
+        NEXUS_REGISTRY = 'localhost:7072'
         IMAGE_VERSION = "${env.BUILD_NUMBER}"
         GITHUB_TOKEN = credentials('GITHUB_TOKEN_TEXT')
 
@@ -173,7 +173,6 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
                         sh 'echo $NEXUS_PASS | docker login localhost:7072 -u $NEXUS_USER --password-stdin'
-                        sh 'ls -la'
                     }
 
                     def services = ['eureka-server', 'config-service', 'api-gateway', 'product-service', 'user-service', 'media-service', 'order-service', 'frontend']
