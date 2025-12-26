@@ -168,46 +168,47 @@ pipeline {
         }
 
         stage('Build & Push Docker Images to Nexus') {
-    steps {
-        echo '🐳 Construction et Push vers Nexus...'
-        script {
-            withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
-                 sh 'echo $NEXUS_PASS | docker login localhost:7072 -u $NEXUS_USER --password-stdin'
-            }
+            steps {
+                echo '🐳 Construction et Push vers Nexus...'
+                script {
+                    sh ' ls -la ' // debug
+                    withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
+                        sh 'echo $NEXUS_PASS | docker login localhost:7072 -u $NEXUS_USER --password-stdin'
+                    }
 
-            def services = ['eureka-server', 'config-service', 'api-gateway', 'product-service', 'user-service', 'media-service', 'order-service', 'frontend']
-            def parallelBuilds = [:]
+                    def services = ['eureka-server', 'config-service', 'api-gateway', 'product-service', 'user-service', 'media-service', 'order-service', 'frontend']
+                    def parallelBuilds = [:]
 
-            services.each { service ->
-                parallelBuilds[service] = {
-                    // Mapping du nom du service vers son dossier physique
-                    def serviceDir = service == 'frontend' ? 'buy-01-frontend' : (service == 'eureka-server' ? 'discovery-service' : service)
-                    
-                    def localTag = "my_nexus_pipeline-${service}:latest"
-                    def nexusTagVersion = "${NEXUS_REGISTRY}/buy02-${service}:${IMAGE_VERSION}"
-                    def nexusTagLatest = "${NEXUS_REGISTRY}/buy02-${service}:latest"
+                    services.each { service ->
+                        parallelBuilds[service] = {
+                            // Mapping du nom du service vers son dossier physique
+                            def serviceDir = service == 'frontend' ? 'buy-01-frontend' : (service == 'eureka-server' ? 'discovery-service' : service)
+                            
+                            def localTag = "my_nexus_pipeline-${service}:latest"
+                            def nexusTagVersion = "${NEXUS_REGISTRY}/buy02-${service}:${IMAGE_VERSION}"
+                            def nexusTagLatest = "${NEXUS_REGISTRY}/buy02-${service}:latest"
 
-                    echo "🔨 Construction de ${service} (Contexte: racine, Dockerfile: ${serviceDir}/Dockerfile)..."
-                    
-                    sh """
-                        docker build \
-                            -t ${localTag} \
-                            -t ${nexusTagVersion} \
-                            -t ${nexusTagLatest} \
-                            --build-arg MAVEN_OPTS="-Dmaven.test.skip=true" \
-                            --cache-from ${DOCKER_HUB_USER}/${PROJECT_NAME}-${service}:latest \
-                            -f ${serviceDir}/Dockerfile .
-                    """
-                    
-                    echo "📤 Push vers Nexus ${service}..."
-                    sh "docker push ${nexusTagVersion}"
-                    sh "docker push ${nexusTagLatest}"
+                            echo "🔨 Construction de ${service} (Contexte: racine, Dockerfile: ${serviceDir}/Dockerfile)..."
+                            
+                            sh """
+                                docker build \
+                                    -t ${localTag} \
+                                    -t ${nexusTagVersion} \
+                                    -t ${nexusTagLatest} \
+                                    --build-arg MAVEN_OPTS="-Dmaven.test.skip=true" \
+                                    --cache-from ${DOCKER_HUB_USER}/${PROJECT_NAME}-${service}:latest \
+                                    -f ${serviceDir}/Dockerfile .
+                            """
+                            
+                            echo "📤 Push vers Nexus ${service}..."
+                            sh "docker push ${nexusTagVersion}"
+                            sh "docker push ${nexusTagLatest}"
+                        }
+                    }
+                    parallel parallelBuilds
                 }
             }
-            parallel parallelBuilds
         }
-    }
-}
 
         stage('Integration Tests') {
             steps {
