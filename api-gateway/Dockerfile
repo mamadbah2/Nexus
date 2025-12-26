@@ -8,9 +8,9 @@ COPY pom.xml .
 # Si vous lancez le build depuis la racine, le chemin source est 'api-gateway'
 COPY api-gateway ./api-gateway
 
-# 3. Lancer le build en ciblant le module spécifique
-# -pl (project list) et -am (also make dependencies)
-RUN mvn clean package -DskipTests -pl api-gateway -am
+WORKDIR /app/api-gateway
+RUN mvn clean package -DskipTests
+
 # Runtime stage
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app

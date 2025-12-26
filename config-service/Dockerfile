@@ -8,9 +8,9 @@ COPY pom.xml .
 # Si vous lancez le build depuis la racine, le chemin source est 'config-service'
 COPY config-service ./config-service
 
-# 3. Lancer le build en ciblant le module spécifique
-# -pl (project list) et -am (also make dependencies)
-RUN mvn clean package -DskipTests -pl config-service -am
+WORKDIR /app/config-service
+RUN mvn clean package -DskipTests
+
 # Runtime stage
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app

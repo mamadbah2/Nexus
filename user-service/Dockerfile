@@ -8,9 +8,8 @@ COPY pom.xml .
 # Si vous lancez le build depuis la racine, le chemin source est 'user-service'
 COPY user-service ./user-service
 
-# 3. Lancer le build en ciblant le module spécifique
-# -pl (project list) et -am (also make dependencies)
-RUN mvn clean package -DskipTests -pl user-service -am
+WORKDIR /app/user-service
+RUN mvn clean package -DskipTests
 
 # Runtime stage
 FROM eclipse-temurin:21-jre-alpine
