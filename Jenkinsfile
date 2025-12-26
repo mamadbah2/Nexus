@@ -171,9 +171,9 @@ pipeline {
             steps {
                 echo '🐳 Construction et Push vers Nexus...'
                 script {
-                    sh ' ls -la ' // debug
                     withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
                         sh 'echo $NEXUS_PASS | docker login localhost:7072 -u $NEXUS_USER --password-stdin'
+                        sh 'ls -la'
                     }
 
                     def services = ['eureka-server', 'config-service', 'api-gateway', 'product-service', 'user-service', 'media-service', 'order-service', 'frontend']
